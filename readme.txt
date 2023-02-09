@@ -26,25 +26,30 @@ Ders 5: [explicit types, union types]
     
     ninjaTwo = { name: 'mario', age: 20, beltColour : "black "}
 
-Ders 6:
+Ders 6:  [any]
 - any kullanarak bu type değişim kısıtlamasını kaldırabiliriz
     let age: any = 25;
     ninjaTwo:  { name: any, age: any }  
     (Burada dikkat edelim, kısıt tanımlarken iki nokta, 
         değişkene değer verirken eşittir kullanıyoruz.)
 
-Ders 7:        
+Ders 7:  [public, src, tsconfig.json, include ]
 - public klasörü : html, js, css
 - src klasörü : server'a deploy etmek istemediğimiz dosyalar, TS
 - "tsc src/sandbox.ts" komutu ts'nin yanına js'sini oluşturuyor.
     Fakat bu karışıklığı önleyip ayrı klasöre çıkarmasını sağlayalım.
     "tsc --init" ile tsconfig.json oluşturduk.
-    İçerisinde "rootDir" i un-comment edip değerini "./src" yaptık.
-    İçerisinde "outDir" i un-comment edip değerini "./public" yaptık.
-    Yani rootDir'den okuduğu ts dosyalarının js'lerini outDir'e çıkaracak.
-    Hata alıyorsan git init ettiğin klasörün içinde alt klasörler içinde çalıştığın için olabilir bu durumda tüm alt klasörlerinde aynı yapıya (src-public) uygun structured olması lazım.
+    * İçerisinde "rootDir" i un-comment edip değerini "./src" yaptık.
+      İçerisinde "outDir" i un-comment edip değerini "./public" yaptık.
+      Yani rootDir'den okuduğu ts dosyalarının js'lerini outDir'e çıkaracak.
+    * Hata alıyorsan git init ettiğin klasörün içinde alt klasörler içinde çalıştığın için olabilir bu durumda tüm alt klasörlerinde aynı yapıya (src-public) uygun structured olması lazım.
+    * Src klasörü dışındaki ts dosyalarının compile edilmesini istemiyorsak tsconfig.json'a "include": ["src"] ekliyoruz.
+
+    In my case it was being ignored because I had noEmit: true in tsconfig.json. For whatever reason, the files still were emitted, but in the same directory instead of following outDir.
+    The config file was read correctly and this error also appeared when using the flag.    
 
 
-In my case it was being ignored because I had noEmit: true in tsconfig.json. For whatever reason, the files still were emitted, but in the same directory instead of following outDir.
-
-The config file was read correctly and this error also appeared when using the flag.    
+Ders 8:  [funtion default and optional value, return colon] 
+    * optional parameter sembolü "?",
+    * return edilcek değerin type'nı belirleme sembolü ":", (nadir durumlarda gerekebilir fakat genelde kullanmayız çünkü zaten return edilmiş olur)
+    * "void" fonksiyonun bir result değeri olmaması anlamına geliyor. Js'te dahilidir ve fonksiyon return etmezse undefined gelir. Fakat Ts'de ayrılmıştır.
